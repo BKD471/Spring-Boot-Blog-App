@@ -1,12 +1,14 @@
 package com.example.Spring.Boot.Blog.controller;
 
 import com.example.Spring.Boot.Blog.dto.PostDto;
+import com.example.Spring.Boot.Blog.dto.PostResponse;
 import com.example.Spring.Boot.Blog.model.Post;
 import com.example.Spring.Boot.Blog.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,8 +28,9 @@ public class PostController {
     }
 
     @GetMapping
-    public List<PostDto> getAllPosts() {
-        return postService.getAllPost();
+    public PostResponse getAllPosts(@RequestParam(value="pageNo", defaultValue ="0", required=false) int pageNo,
+                                    @RequestParam(value="pageSize",defaultValue ="10",required = false ) int pageSize) {
+        return postService.getAllPost(pageNo,pageSize);
     }
 
 
