@@ -1,14 +1,15 @@
 package com.example.Spring.Boot.Blog.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+//@Data// @data has toString method injecting it will create an recursive call between post & comment entity
+//resulting in stackoverflow
+//instead use getter and setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

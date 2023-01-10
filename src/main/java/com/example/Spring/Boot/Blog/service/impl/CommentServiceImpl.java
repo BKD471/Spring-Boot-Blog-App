@@ -8,23 +8,22 @@ import com.example.Spring.Boot.Blog.model.Post;
 import com.example.Spring.Boot.Blog.repository.CommentRepository;
 import com.example.Spring.Boot.Blog.repository.PostRepository;
 import com.example.Spring.Boot.Blog.service.CommentService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
-
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
+    private final ModelMapper mapper;
 
-    public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository,ModelMapper mapper) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
+        this.mapper=mapper;
     }
 
     @Override
@@ -47,7 +46,7 @@ public class CommentServiceImpl implements CommentService {
         //Fetch All Comments by PostId
         List<Comments> allFetchedComments = commentRepository.findByPostId(postId);
         if (allFetchedComments.size() == 0) {
-            throw new BlogApiException(HttpStatus.BAD_REQUEST, String.format("No such posts found with id =%s", postId));
+            throw new ResourceNotFoundException("post","id",postId);
         }
         return allFetchedComments.stream().map(comment -> mapToDto(comment)).collect(Collectors.toList());
     }
@@ -55,15 +54,12 @@ public class CommentServiceImpl implements CommentService {
     public Comments fetchComment(long postId, long commentId) {
         //Fetch All comments by PostId
         List<Comments> allFetchedComments = commentRepository.findByPostId(postId);
-        if (allFetchedComments.size() == 0) {
-            throw new BlogApiException(HttpStatus.BAD_REQUEST, String.format("Post not found with id %s", postId));
-        }
-//Check whether any comment with id given is present in all the comments list fetched for the post
+        if (allFetchedComments.size() == 0) throw new ResourceNotFoundException("post","id",postId);
+        //Check whether any comment with id given is present in all the comments list fetched for the post
         List<Comments> getCommentById = allFetchedComments.stream().filter(comment -> comment.getId() == commentId).collect(Collectors.toList());
-        if (getCommentById.size() == 0) {
-            throw new BlogApiException(HttpStatus.BAD_REQUEST,
+        if (getCommentById.size() == 0) throw new BlogApiException(HttpStatus.BAD_REQUEST,
                     String.format("No Comment with id =%s found for the post with id =%s", commentId, postId));
-        }
+
         return getCommentById.get(0);
     }
 
@@ -97,20 +93,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     CommentDto mapToDto(Comments comments) {
-        CommentDto commentDto = new CommentDto();
-        commentDto.setId(comments.getId());
-        commentDto.setName(comments.getName());
-        commentDto.setEmail(comments.getEmail());
-        commentDto.setBody(comments.getBody());
+        CommentDto commentDto = mapper.map(comments,CommentDto.class);
         return commentDto;
     }
 
     Comments mapToEntity(CommentDto commentDto) {
-        Comments comments = new Comments();
-        comments.setId(commentDto.getId());
-        comments.setName(commentDto.getName());
-        comments.setEmail(commentDto.getEmail());
-        comments.setBody(commentDto.getBody());
+        Comments comments = mapper.map(commentDto,Comments.class);
         return comments;
     }
 }

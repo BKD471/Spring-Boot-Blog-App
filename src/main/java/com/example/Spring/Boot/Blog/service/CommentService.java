@@ -1,7 +1,6 @@
 package com.example.Spring.Boot.Blog.service;
 
 import com.example.Spring.Boot.Blog.dto.CommentDto;
-
 import java.util.List;
 
 public interface CommentService {
