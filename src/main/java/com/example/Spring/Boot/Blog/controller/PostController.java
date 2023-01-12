@@ -3,8 +3,10 @@ package com.example.Spring.Boot.Blog.controller;
 import com.example.Spring.Boot.Blog.dto.PostDto;
 import com.example.Spring.Boot.Blog.dto.PostResponse;
 import com.example.Spring.Boot.Blog.service.PostService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import static com.example.Spring.Boot.Blog.utils.AppConstants.*;
 
@@ -18,8 +20,9 @@ public class PostController {
         this.postService = postService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
+    ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto) {
         return new ResponseEntity<>(postService.createPost(postDto), HttpStatus.CREATED);
     }
 
@@ -38,12 +41,14 @@ public class PostController {
         return new ResponseEntity<>(postDto, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable(name = "id") long id) {
+    public ResponseEntity<PostDto> updatePost(@Valid @RequestBody PostDto postDto, @PathVariable(name = "id") long id) {
         PostDto updatedPost = postService.updatePostById(postDto, id);
         return ResponseEntity.status(HttpStatus.OK).body(updatedPost);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePost(@PathVariable(name = "id") long id) {
         postService.deletePostById(id);
