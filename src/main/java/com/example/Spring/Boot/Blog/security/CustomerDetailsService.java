@@ -28,17 +28,13 @@ public class CustomerDetailsService implements UserDetailsService {
         User user = userRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail).
                 orElseThrow(() -> new UsernameNotFoundException(String.format("User not found with id/username %s", usernameOrEmail)));
 
-        System.out.println(user.getUsername());
         //convert set of roles from user to set of grantedAuthority
         //spring security expects set of grantedAuthorities
         Set<GrantedAuthority> authorities = user.getRoles().stream().
                 map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
 
 
-        System.out.println(authorities);
         //conver user obj to spring security provided user obj
         return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),authorities);
-
-
     }
 }

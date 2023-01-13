@@ -21,13 +21,11 @@ public class SecurityConfig {
 
     private UserDetailsService userDetailsService;
     public SecurityConfig(UserDetailsService userDetailsService){
-        System.out.println("efgwrg");
         this.userDetailsService=userDetailsService;
     }
 
     @Bean
     public static PasswordEncoder passwordEncoder(){
-        System.out.println("wrgrg");
         return new BCryptPasswordEncoder();
     }
 
