@@ -1,17 +1,17 @@
 package com.example.Spring.Boot.Blog.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 
@@ -19,9 +19,23 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity  // adding security to method level
 public class SecurityConfig {
 
+    private UserDetailsService userDetailsService;
+    public SecurityConfig(UserDetailsService userDetailsService){
+        System.out.println("efgwrg");
+        this.userDetailsService=userDetailsService;
+    }
+
     @Bean
     public static PasswordEncoder passwordEncoder(){
+        System.out.println("wrgrg");
         return new BCryptPasswordEncoder();
+    }
+
+
+    //After 5.2 spring security automatically provides UserDetailsService and passwordEncode to AuthenticationManager
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
     //Only the get requests will be accesible to any admin/users
@@ -34,12 +48,12 @@ public class SecurityConfig {
         ).httpBasic(Customizer.withDefaults());
         return http.build();
     }
-
-    @Bean
-    UserDetailsService userDetailsService(){
-        UserDetails bhaskar= User.builder().username("Bhaskar").password(passwordEncoder().encode("Bhaskar")).roles("USER").build();
-        UserDetails admin= User.builder().username("admin").password(passwordEncoder().encode("admin")).roles("ADMIN").build();
-        return new InMemoryUserDetailsManager(bhaskar,admin);
-    }
+//In memory authentication
+//    @Bean
+//    UserDetailsService userDetailsService(){
+//        UserDetails bhaskar= User.builder().username("Bhaskar").password(passwordEncoder().encode("Bhaskar")).roles("USER").build();
+//        UserDetails admin= User.builder().username("admin").password(passwordEncoder().encode("admin")).roles("ADMIN").build();
+//        return new InMemoryUserDetailsManager(bhaskar,admin);
+//    }
   }
 

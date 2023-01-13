@@ -66,8 +66,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 //        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorsMap);
 //    }
 
-
-
     //handle Global Exception
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception, WebRequest webRequest){
