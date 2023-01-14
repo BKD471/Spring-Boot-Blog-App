@@ -13,7 +13,7 @@ import static com.example.Spring.Boot.Blog.utils.AppConstants.*;
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
-    private PostService postService;
+    private final PostService postService;
 
     //no need to autowire  for class created with bean and has one constr
     public PostController(PostService postService) {

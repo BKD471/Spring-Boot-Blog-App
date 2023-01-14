@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -39,6 +40,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorDetails);
     }
 
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorDetails> handleBadCredentialsExceptionException(BadCredentialsException exception, WebRequest webRequest){
+        ErrorDetails errorDetails=new ErrorDetails(new Date(),exception.getMessage(), webRequest.getDescription(false));
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorDetails);
+    }
 
     //handling exception when data passed from json body violates our constraint
     //ist approach by extending ResponseEntityExceptionHandler and overiding handleMethodARgumentNotValid

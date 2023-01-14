@@ -19,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity  // adding security to method level
 public class SecurityConfig {
 
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
     public SecurityConfig(UserDetailsService userDetailsService){
         this.userDetailsService=userDetailsService;
     }
@@ -36,14 +36,14 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    //Only the get requests will be accesible to any admin/users
+    //Only the get requests will be accesible to any users
     //otherwise to create,update delette , you need to be admin
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests((auth)->
-                auth.requestMatchers(HttpMethod.GET,"/api/**").permitAll()
-                        .anyRequest().authenticated()
-        ).httpBasic(Customizer.withDefaults());
+                auth.requestMatchers(HttpMethod.GET,"/api/**").permitAll().
+                        requestMatchers("/api/auth/**").permitAll()
+                        .anyRequest().authenticated());
         return http.build();
     }
 //In memory authentication
