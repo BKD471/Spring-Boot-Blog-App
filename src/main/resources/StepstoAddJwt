@@ -1,0 +1,8 @@
+1) Add JWT related Maven Dependencies
+2) Create JwtAuthenticationEntryPoint
+3) Add jwt properties in app.properties
+4)create jwtTokenProvider---> a utility class
+5) Create jwtAuthenticationFilter
+ Create jwtAuthResponseDTO
+  create jwt in Spring Security
+  change Login/signin REST API to return  Jwt token
