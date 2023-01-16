@@ -7,6 +7,7 @@ import com.example.Spring.Boot.Blog.model.Role;
 import com.example.Spring.Boot.Blog.model.User;
 import com.example.Spring.Boot.Blog.repository.RolesRepository;
 import com.example.Spring.Boot.Blog.repository.UserRepository;
+import com.example.Spring.Boot.Blog.security.JwtTokenProvider;
 import com.example.Spring.Boot.Blog.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,12 +28,15 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private  final RolesRepository rolesRepository;
     private  final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
     public AuthServiceImpl(AuthenticationManager authenticationManager,
-                           UserRepository userRepository,RolesRepository rolesRepository ,PasswordEncoder passwordEncoder){
+                           UserRepository userRepository,RolesRepository rolesRepository ,PasswordEncoder passwordEncoder,
+                           JwtTokenProvider jwtTokenProvider){
         this.authenticationManager=authenticationManager;
         this.userRepository=userRepository;
         this.rolesRepository=rolesRepository;
         this.passwordEncoder=passwordEncoder;
+        this.jwtTokenProvider=jwtTokenProvider;
     }
     @Override
     public String login(LoginDto loginDto) {
@@ -42,11 +46,12 @@ public class AuthServiceImpl implements AuthService {
                 (loginDto.getUsernameOrEmail(),
                 loginDto.getPassword()));
 
-        System.out.println(authentication);
        //once we get auth obj store it in spring security context holder
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return "User logged in Successfully";
+        String token=jwtTokenProvider.generateToken(authentication);
+
+        return token;
     }
 
     @Override

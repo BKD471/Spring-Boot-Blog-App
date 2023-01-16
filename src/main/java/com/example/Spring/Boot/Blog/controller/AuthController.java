@@ -1,5 +1,6 @@
 package com.example.Spring.Boot.Blog.controller;
 
+import com.example.Spring.Boot.Blog.dto.JwtAuthResponseDto;
 import com.example.Spring.Boot.Blog.dto.LoginDto;
 import com.example.Spring.Boot.Blog.dto.SignUpDto;
 import com.example.Spring.Boot.Blog.service.AuthService;
@@ -22,9 +23,11 @@ public class AuthController {
    }
 
    @PostMapping(value={"/login","/signin"})
-    ResponseEntity<String> login(@RequestBody LoginDto loginDto){
-       String response=authService.login(loginDto);
-       return ResponseEntity.status(HttpStatus.OK).body(response);
+    ResponseEntity<JwtAuthResponseDto> login(@RequestBody LoginDto loginDto){
+       String token=authService.login(loginDto);
+       JwtAuthResponseDto jwtAuthResponse=new JwtAuthResponseDto();
+       jwtAuthResponse.setAccessToken(token);
+       return ResponseEntity.status(HttpStatus.OK).body(jwtAuthResponse);
     }
 
     @PostMapping(value={"/signup","/register"})
