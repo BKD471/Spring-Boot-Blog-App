@@ -1,7 +1,9 @@
 package com.example.Spring.Boot.Blog.controller;
 
+import com.example.Spring.Boot.Blog.dto.CategoryDto;
 import com.example.Spring.Boot.Blog.dto.PostDto;
 import com.example.Spring.Boot.Blog.dto.PostResponse;
+import com.example.Spring.Boot.Blog.service.CategoryService;
 import com.example.Spring.Boot.Blog.service.PostService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -16,7 +18,7 @@ public class PostController {
     private final PostService postService;
 
     //no need to autowire  for class created with bean and has one constr
-    public PostController(PostService postService) {
+    public PostController(PostService postService,CategoryService categoryService) {
         this.postService = postService;
     }
 
@@ -54,5 +56,10 @@ public class PostController {
         postService.deletePostById(id);
         String response = String.format("Post with id =%s Deleted Successfully", id);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/{postId}/categories")
+    public CategoryDto getCategoryByPost(@PathVariable(name="postId") long postId){
+        return postService.getCategoryByPost(postId);
     }
 }

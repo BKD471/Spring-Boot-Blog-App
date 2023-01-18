@@ -3,6 +3,7 @@ package com.example.Spring.Boot.Blog.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 //@Data// @data has toString method injecting it will create an recursive call between post & comment entity
@@ -30,4 +31,9 @@ public class Post {
 
     @OneToMany(mappedBy = "post",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Comments> comments=new HashSet<>();
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="category_id")
+    private Category category;
 }

@@ -1,8 +1,10 @@
 package com.example.Spring.Boot.Blog.service.impl;
 
+import com.example.Spring.Boot.Blog.dto.CategoryDto;
 import com.example.Spring.Boot.Blog.dto.PostDto;
 import com.example.Spring.Boot.Blog.dto.PostResponse;
 import com.example.Spring.Boot.Blog.exception.ResourceNotFoundException;
+import com.example.Spring.Boot.Blog.model.Category;
 import com.example.Spring.Boot.Blog.model.Post;
 import com.example.Spring.Boot.Blog.repository.PostRepository;
 import com.example.Spring.Boot.Blog.service.PostService;
@@ -91,6 +93,13 @@ public class PostServiceImpl implements PostService {
         Optional<Post> post = postRepository.findById(id);
         if(post.isPresent()) postRepository.deleteById(id);
         else throw  new ResourceNotFoundException("post","id",id);
+    }
+
+    @Override
+    public CategoryDto getCategoryByPost(long postId) {
+        Post fetchedPost=postRepository.findById(postId).get();
+        Category categories= fetchedPost.getCategory();
+        return mapper.map(categories,CategoryDto.class);
     }
 
     private PostDto mapToDto(Post post) {
