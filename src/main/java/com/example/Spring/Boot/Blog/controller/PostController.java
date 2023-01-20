@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 import static com.example.Spring.Boot.Blog.utils.AppConstants.*;
 
 @RestController
@@ -29,11 +32,11 @@ public class PostController {
     }
 
     @GetMapping
-    public PostResponse getAllPosts(@RequestParam(value = "pageNo", defaultValue = DEFAULT_PAGE_NUMBER, required = false) int pageNo,
+    public ResponseEntity<PostResponse> getAllPosts(@RequestParam(value = "pageNo", defaultValue = DEFAULT_PAGE_NUMBER, required = false) int pageNo,
                                     @RequestParam(value = "pageSize", defaultValue = DEFAULT_PAGE_SIZE, required = false) int pageSize,
                                     @RequestParam(value = "sortBy", defaultValue = DEFAULT_PAGE_SORT_COLUMN, required = false) String sortBy,
                                     @RequestParam(value = "sortDir", defaultValue = DEFAULT_PAGE_SORT_DIR, required = false) String sortDir) {
-        return postService.getAllPost(pageNo, pageSize, sortBy, sortDir);
+        return ResponseEntity.status(HttpStatus.OK).body(postService.getAllPost(pageNo, pageSize, sortBy, sortDir));
     }
 
 
@@ -59,7 +62,12 @@ public class PostController {
     }
 
     @GetMapping("/{postId}/categories")
-    public CategoryDto getCategoryByPost(@PathVariable(name="postId") long postId){
-        return postService.getCategoryByPost(postId);
+    public ResponseEntity<CategoryDto> getCategoryByPost(@PathVariable(name="postId") long postId){
+        return ResponseEntity.status(HttpStatus.OK).body(postService.getCategoryByPost(postId));
+    }
+
+    @GetMapping("/categories/{id}/allposts")
+    public ResponseEntity<List<PostDto>> getAllPostsByCategoryId(@PathVariable(name="id") long categoryId){
+        return ResponseEntity.status(HttpStatus.OK).body(postService.getAllPostsByCategoryId(categoryId));
     }
 }

@@ -4,6 +4,8 @@ import com.example.Spring.Boot.Blog.dto.CategoryDto;
 import com.example.Spring.Boot.Blog.dto.PostDto;
 import com.example.Spring.Boot.Blog.dto.PostResponse;
 
+import java.util.List;
+
 
 public interface PostService {
      PostDto createPost(PostDto postDto);
@@ -13,4 +15,5 @@ public interface PostService {
      PostDto updatePostById(PostDto postDto,long id);
      void deletePostById(long id);
      CategoryDto getCategoryByPost(long PostId);
+     List<PostDto> getAllPostsByCategoryId(long categoryId);
 }

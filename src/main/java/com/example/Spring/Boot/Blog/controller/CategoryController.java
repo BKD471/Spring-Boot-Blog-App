@@ -28,19 +28,29 @@ public class CategoryController {
     }
 
 
-    @GetMapping("/{categoryId}")
-    public ResponseEntity<CategoryDto> getCategoryByCategoryId(@PathVariable(name="categoryId") long categoryId){
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryDto> getCategoryByCategoryId(@PathVariable(name="id") long categoryId){
         CategoryDto categoryDto=categoryService.getCategoryByCategoryId(categoryId);
         return ResponseEntity.status(HttpStatus.OK).body(categoryDto);
     }
 
-    @GetMapping("/{categoryId}/posts")
-    public List<PostDto> getAllPostsByCategoryId(@PathVariable(name="categoryId") long categoryId){
-        return categoryService.getAllPostsByCategoryId(categoryId);
+    @GetMapping
+    public  ResponseEntity<List<CategoryDto>> getAllCategories(){
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.getAllCategories());
     }
 
-    @GetMapping
-    public  List<CategoryDto> getAllCategories(){
-        return categoryService.getAllCategories();
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{id}")
+    public  ResponseEntity<CategoryDto> updateCategory(@PathVariable(name="id") long categoryId,
+                                                       @RequestBody CategoryDto categoryDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.updateCategory(categoryId,categoryDto));
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteCategory(@PathVariable(name="id") long categoryId){
+        categoryService.deleteCategories(categoryId);
+        String response=String.format("Message with id %s got deleted successfully",categoryId);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
