@@ -1,7 +1,6 @@
 package com.example.Spring.Boot.Blog.controller;
 
 import com.example.Spring.Boot.Blog.dto.CategoryDto;
-import com.example.Spring.Boot.Blog.dto.PostDto;
 import com.example.Spring.Boot.Blog.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/api")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -20,7 +19,7 @@ public class CategoryController {
         this.categoryService=categoryService;
     }
 
-    @PostMapping
+    @PostMapping("/v1/categories")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CategoryDto> addCategory(@RequestBody CategoryDto categoryDto){
         CategoryDto savedCategoryDto=categoryService.addCategory(categoryDto);
@@ -28,26 +27,26 @@ public class CategoryController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/v1/categories/{id}")
     public ResponseEntity<CategoryDto> getCategoryByCategoryId(@PathVariable(name="id") long categoryId){
         CategoryDto categoryDto=categoryService.getCategoryByCategoryId(categoryId);
         return ResponseEntity.status(HttpStatus.OK).body(categoryDto);
     }
 
-    @GetMapping
+    @GetMapping("/v1/categories")
     public  ResponseEntity<List<CategoryDto>> getAllCategories(){
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.getAllCategories());
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/{id}")
+    @PutMapping("/v1/categories/{id}")
     public  ResponseEntity<CategoryDto> updateCategory(@PathVariable(name="id") long categoryId,
                                                        @RequestBody CategoryDto categoryDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.updateCategory(categoryId,categoryDto));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/v1/categories/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable(name="id") long categoryId){
         categoryService.deleteCategories(categoryId);
         String response=String.format("Message with id %s got deleted successfully",categoryId);

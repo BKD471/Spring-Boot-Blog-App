@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Objects;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api")
 public class AuthController {
    private final AuthService authService;
 
@@ -22,7 +21,7 @@ public class AuthController {
        this.authService=authService;
    }
 
-   @PostMapping(value={"/login","/signin"})
+   @PostMapping(value={"/v1/auth/login","/v1/auth/signin"})
     ResponseEntity<JwtAuthResponseDto> login(@RequestBody LoginDto loginDto){
        String token=authService.login(loginDto);
        JwtAuthResponseDto jwtAuthResponse=new JwtAuthResponseDto();
@@ -30,7 +29,7 @@ public class AuthController {
        return ResponseEntity.status(HttpStatus.OK).body(jwtAuthResponse);
     }
 
-    @PostMapping(value={"/signup","/register"})
+    @PostMapping(value={"/v1/auth/signup","/v1/auth/register"})
     ResponseEntity<String> register(@RequestBody SignUpDto signUpDto){
        String response=authService.SignUp(signUpDto);
        return ResponseEntity.status(HttpStatus.CREATED).body(response);
