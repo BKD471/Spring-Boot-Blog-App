@@ -1,0 +1,788 @@
+{
+	"info": {
+		"_postman_id": "3abdb6d4-b9e5-45c8-b5b7-3d83a605dfac",
+		"name": "Blog  AWs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20164766"
+	},
+	"item": [
+		{
+			"name": "Create Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiaGFza2FyQG1pY3Jvc29mdC5vcmciLCJpYXQiOjE2NzQ0NjczNTIsImV4cCI6MTY3NDU0NTQwMH0.qzRponwIFRJthEatKMLlFxTf44ERk8IVJ0sOCQ13MjVAlmIK6gBErjjsAOSOyoUT",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"I will be best\",\n    \"description\":\"I will be best developer\",\n    \"content\":\"I will be best developer in town\",\n    \"categoryId\":9\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts?pageNo=0&pageSize=50&sortBy=id",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "50"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiaGFza2FyQG1pY3Jvc29mdC5vcmciLCJpYXQiOjE2NzQ0NjczNTIsImV4cCI6MTY3NDU0NTQwMH0.qzRponwIFRJthEatKMLlFxTf44ERk8IVJ0sOCQ13MjVAlmIK6gBErjjsAOSOyoUT",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-VERSION",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts/1?version=1",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"1"
+					],
+					"query": [
+						{
+							"key": "version",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Post By Id v2 Version",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-VERSION",
+						"value": "2",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v2/posts/1?version=2",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v2",
+						"posts",
+						"1"
+					],
+					"query": [
+						{
+							"key": "version",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Post By Id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts/1",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Post By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts/1",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Paging",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts?pageNo=0&pageSize=5",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sorting By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts?pageNo=0&pageSize=5&sortBy=title",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "5"
+						},
+						{
+							"key": "sortBy",
+							"value": "title"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sorting By Direction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts?pageNo=0&pageSize=5&sortBy=id&sortDir=asc",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts"
+					],
+					"query": [
+						{
+							"key": "pageNo",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "5"
+						},
+						{
+							"key": "sortBy",
+							"value": "id"
+						},
+						{
+							"key": "sortDir",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment for Post",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiaGFza2FyQG1pY3Jvc29mdC5vcmciLCJpYXQiOjE2NzQ0NjczNTIsImV4cCI6MTY3NDU0NTQwMH0.qzRponwIFRJthEatKMLlFxTf44ERk8IVJ0sOCQ13MjVAlmIK6gBErjjsAOSOyoUT",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Good Post\",\n    \"email\":\"user@gmail.com\",\n    \"body\":\"It was a good post\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts/1/comments",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Comments By PostId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts/2/comments",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"2",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Comment By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts/2/comments/99",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"2",
+						"comments",
+						"99"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Comment",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts/2/comments/9",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"2",
+						"comments",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Comment for a post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts/2/comments/8",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"2",
+						"comments",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Categories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiaGFza2FyQG1pY3Jvc29mdC5vcmciLCJpYXQiOjE2NzQ0NjUyNzEsImV4cCI6MTY3NDU0MzMxOX0.cLKkqX6iieVswI6pNWhK4WgvgdWa8sIBswj4C6G3jvIIRaieDgfLyakoZrOWZTwo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"AWS ServerLess\",\n    \"description\":\"A Problem on Aws ServerLess\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/categories",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Category By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Category By PostId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts/35/categories",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"35",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Category By CategoryId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/categories/1",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All posts By CategoryId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/posts/categories/9/allposts",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"categories",
+						"9",
+						"allposts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Categories",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiaGFza2FyQG1pY3Jvc29mdC5vcmciLCJpYXQiOjE2NzQ0NjczNTIsImV4cCI6MTY3NDU0NTQwMH0.qzRponwIFRJthEatKMLlFxTf44ERk8IVJ0sOCQ13MjVAlmIK6gBErjjsAOSOyoUT",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/categories",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Category By Id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/categories/2",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Category By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/categories/5",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"categories",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"usernameOrEmail\":\"bhaskar@microsoft.org\",\n     \"password\":\"!@#$%^&*zxcvbnm\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/auth/signin",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"admin\",\n    \"email\":\"admin@gmail.com\",\n    \"username\":\"admin\",\n    \"password\":\"admin\"\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://springbootblogapp-env.eba-5r9rmbwn.ap-south-1.elasticbeanstalk.com/api/v1/auth/signup",
+					"protocol": "http",
+					"host": [
+						"springbootblogapp-env",
+						"eba-5r9rmbwn",
+						"ap-south-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
