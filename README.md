@@ -37,7 +37,7 @@ Note: Only admin can do any operations on Category Resources.</p>
   <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/auth/signup">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/auth/signup</a></li>
 Request Method:POST <br> 
 Request Body in JSON:
-       <br>body: { " name":" &lt Yr name &gt ",<br>
+       <br>body: { <br>" name":" &lt Yr name &gt ",<br>
          "email":" &lt Yr email &gt ",<br>
         "username":" &lt yr username &gt ",<br>
          "password":" &lt yr password &gt "<br>
@@ -46,7 +46,7 @@ Request Body in JSON:
 <li>Sign In: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/auth/signin">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/auth/signin</a></li>
 Request Method:POST<br> 
 Request Body in JSON:<br>
-body: {
+body: {<br>
     "usernameOrEmail":" &lt yr email u gave while sign up &gt",<br>
      "password":" &lt yr password that you gave while sign up &gt"<br>
 }
@@ -76,19 +76,28 @@ Only a admin can create/update/delete categories</p>
 
 <ul>
     <li> create post: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts</a></li>
-      Request Method:POST<br>
+TOKEN REQUIRES: YES  <br>    
+Request Method:POST<br>
 Request Body in JSON:
        <br>{ "title": " &lt title of post &gt ",<br>
      "description":" &lt description of post &gt ",<br>
      "content":" &lt content of post &gt ",<br>
     "categoryId": &lt category id from 1 to 9 given above to which yr post belong &gt <br>
 }
-<li>Get Post By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/2?version=1">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt YOUR POST_ID &gt; </b>?version=1</a><br>Request Method:GET</li><br>
-<li>Get All Posts: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts?pageNo=0&pageSize=10&sortBy=id&sortDir=asc">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts?pageNo=0&pageSize=10&sortBy=id&sortDir=asc</a><br> Request Method:GET</li>
+<li>Get Post By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/2?version=1">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt YOUR POST_ID &gt; </b>?version=1</a><br>Request Method:GET <br>TOKEN REQUIRES: NO</li><br>
+<li>Get All Posts: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts?pageNo=0&pageSize=10&sortBy=id&sortDir=asc">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts?pageNo=0&pageSize=10&sortBy=id&sortDir=asc</a><br> Request Method:GET<br>TOKEN REQUIRES: NO</li>
 <p>Sort all the posts by any attributes (default:id) and in any direction (default:ascending)</p>
 
-<li>Update POST By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/3">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt YOUR_POST_ID &gt;</b></a><br>Request Method: PUT</li><br>
-<li>Delete POST By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/1">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt YOUR_POST_ID &gt</b></a><br>Request method: DELETE</li>
+<li>Update POST By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/3">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt YOUR_POST_ID &gt;</b></a><br>Request Method: PUT<br>TOKEN REQUIRES: YES</li><br>
+Request Body:<br>
+{
+            "title": "&lt updated title of post &gt",<br>
+            "description": " &lt updated description of post &gt",<br>
+            "content": "&lt  updated content of post &gt",<br>
+            "categoryId": &lt updated category id &gt
+}<br>
+<li>Delete POST By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/111">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt YOUR_POST_ID &gt</b></a><br>Request method: DELETE<br>TOKEN REQUIRES: ADMIN</li>
+Only admin can perform this
 </ul>
 <br>
 
@@ -98,6 +107,7 @@ Request Body in JSON:
 <li>Create Comments for a Post By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/1/comments">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b> &lt YOUR_POST_ID &gt; </b>/comments</a></li><br>
 Request Method: POST<br>
 Request Body in json<br>
+TOKEN REQUIRES: YES<br>
 {<br>
     "name":" &lt name of commenter &gt",<br>
     "email":" &lt email id &gt",<br>
@@ -105,11 +115,12 @@ Request Body in json<br>
 }
 
 <li>Get All Comments for a post By Post Id:<a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/2/comments">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt POST_ID &gt;</b>/comments</a></li>
-Request Method:GET<br><br>
+Request Method:GET<br>TOKEN REQUIRES: NO<br><br>
 <li>Get a particular comment by comment id under a post by post id:<a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/1/comments/2">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt POST_ID &gt</b>/comments/<b>&lt COMMENT_ID &gt</b></a></li>
-Request Method:GET<br><br>
+Request Method:GET<br>TOKEN REQUIRES: NO<br><br>
 <li>Update a Comment By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/2/comments/5">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt POST_ID &gt</b>/comments/<b>&lt COMMENT_ID &gt</b></a></li>
 Request Method:PUT <br>
+TOKEN REQUIRES: YES<br>
 Rquest Body in JSON: <br>
 {
 
@@ -118,6 +129,57 @@ Rquest Body in JSON: <br>
                     "body": "<updated comment>"
 }
 
+<li>Delete Comments By Id:<a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/20/comments/8">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt POST_ID &gt</b>/comments/<b>&lt COMMENT_ID &gt</b></a></li>
+Request Method: DELETE<br>
+TOKEN REQUIRES: YES<br>
+</ul>
+
+<br>
+
+
+<h4>Categories</h4>
+<p>Unfortunately you need admin access to create/delete/update categories</p>
+
+<ul>
+<li>Create Categories: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/categories">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/categories</a></li>
+Request Method:POST<br>
+TOKEN REQUIRES: ADMIN<br>
+Request Body in json<br>
+{
+    
+    "name": "<topic>",
+    "description": "<description of topic>"<br>
+}<br>
+<li>Get category by categoryId: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/categories/4">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/categories/<b>&lt CATEGORY_ID &gt</b></a> </li>
+Request Mtehod:GET<br>TOKEN REQUIRES: NO<br><br>
+<li>Get to know the category of a post by postId: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/4/categories">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt POST_ID &gt</b>/categories</a></li>
+Request Method: GET<br>TOKEN REQUIRES: NO<br>
+<br>
+<li>Get all posts for a category : <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/categories/9/allposts">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/categories/<b>&lt CATEGORY_ID &gt</b>/allposts</a></li>
+Request Method:GET<br>TOKEN REQUIRES: NO<br><br>
+<li>Get all categories: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/categories">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/categories</a></li>
+Request Method: GET<br>
+TOKEN REQUIRES: NO<br><br>
+<li>Update category NA for non admin: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/categories/2">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/categories/<b>&lt CATEGORY_ID &gt</b></a></li>
+Request Method: PUT<br>
+TOKEN REQUIRES: ADMIN<br>
+Request Body:<br>
+{<br>
+    "id": &lt Category_id &gt,<br>
+    "name": "&lt updated category name &gt",<br>
+    "description": "&lt updated category description &gt"<br>
+}
+<li>Delete category NA for non admin: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/categories/555">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/categories/<b>&lt CATEGORY_ID &gt</b></a></li>
+Request Method:DELETE<br>
+TOKEN REQUIRES: ADMIN<br>
 
 </ul>
 
+<br>
+<p>Sharing my admin credentials.<b>PLEASE DONT MISUSE</b></p>
+
+{ "usernameOrEmail":"admin",
+"password":"admin@gmail.com"
+}
+
+signin with it and YOU are ADMIN :), it will give you bearer token use it in every PUT/POST/DELETE requests auth token in postman.
