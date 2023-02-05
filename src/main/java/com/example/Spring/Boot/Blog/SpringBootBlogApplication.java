@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 
-@SpringBootApplication// no need for @Configuration annotation SpringBootApplication automatically does autoscan
+@SpringBootApplication
 public class SpringBootBlogApplication  {
 	@Bean
 	public ModelMapper modelMapper(){
