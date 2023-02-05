@@ -106,8 +106,8 @@ Only admin can perform this
 <ul>
 <li>Create Comments for a Post By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/1/comments">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b> &lt YOUR_POST_ID &gt; </b>/comments</a></li><br>
 Request Method: POST<br>
-Request Body in json<br>
 TOKEN REQUIRES: YES<br>
+Request Body in json<br>
 {<br>
     "name":" &lt name of commenter &gt",<br>
     "email":" &lt email id &gt",<br>
