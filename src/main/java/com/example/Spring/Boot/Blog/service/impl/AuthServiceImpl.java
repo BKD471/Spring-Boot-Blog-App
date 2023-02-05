@@ -18,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -80,7 +79,7 @@ public class AuthServiceImpl implements AuthService {
 
         Set<Role> roles=new HashSet<>();
         Role userRole=rolesRepository.findByName("ROLE_USER").get();
-        //Optional.get() can be used instead of thowing OrElseThroe  returns NoSuchElementFound if nothing found
+        //Optional.get() can be used instead of thowing OrElseThroe , returns NoSuchElementFound if nothing found
 
         roles.add(userRole);
         user.setRoles(roles);
