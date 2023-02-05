@@ -37,18 +37,18 @@ Note: Only admin can do any operations on Category Resources.</p>
   <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/auth/signup">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/auth/signup</a></li>
 Request Method:POST <br> 
 Request Body in JSON:
-       <br>body: { "name":"Yr name",<br>
-         "email":"Yr email",<br>
-        "username":"yr username",<br>
-         "password":"yr password"<br>
+       <br>body: { " name":" &lt Yr name &gt ",<br>
+         "email":" &lt Yr email &gt ",<br>
+        "username":" &lt yr username &gt ",<br>
+         "password":" &lt yr password &gt "<br>
 }
 <p>It will only display the confirmation. Next sign in</p>
 <li>Sign In: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/auth/signin">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/auth/signin</a></li>
 Request Method:POST<br> 
 Request Body in JSON:<br>
 body: {
-    "usernameOrEmail":"yr email u gave while sign up",<br>
-     "password":"yr password that you gave while sign up"<br>
+    "usernameOrEmail":" &lt yr email u gave while sign up &gt",<br>
+     "password":" &lt yr password that you gave while sign up &gt"<br>
 }
 <p>If successful, it will generate a token,  use that bearer token in postman authentication for every POST,PUT,DEL requests</p>
 </ul>
@@ -72,15 +72,15 @@ Only a admin can create/update/delete categories</p>
 </ol>
 <br>
 
-<h4>All Post resources Endpoints</h4>
+<h4>All Post resource services Endpoints</h4>
 
 <ul>
     <li> create post: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts</a></li>
       Request Method:POST<br>
 Request Body in JSON:
-       <br>{ "title": "title of post",<br>
-     "description":"description of post",<br>
-     "content":"content of post",<br>
+       <br>{ "title": " &lt title of post &gt ",<br>
+     "description":" &lt description of post &gt ",<br>
+     "content":" &lt content of post &gt ",<br>
     "categoryId": &lt category id from 1 to 9 given above to which yr post belong &gt <br>
 }
 <li>Get Post By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/2?version=1">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt YOUR POST_ID &gt; </b>?version=1</a><br>Request Method:GET</li><br>
@@ -90,7 +90,34 @@ Request Body in JSON:
 <li>Update POST By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/3">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt YOUR_POST_ID &gt;</b></a><br>Request Method: PUT</li><br>
 <li>Delete POST By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/1">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt YOUR_POST_ID &gt</b></a><br>Request method: DELETE</li>
 </ul>
+<br>
+
+<h4>Comments resource  services endpoints</h4>
+
+<ul>
+<li>Create Comments for a Post By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/1/comments">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b> &lt YOUR_POST_ID &gt; </b>/comments</a></li><br>
+Request Method: POST<br>
+Request Body in json<br>
+{<br>
+    "name":" &lt name of commenter &gt",<br>
+    "email":" &lt email id &gt",<br>
+    "body":" &lt comments left by him/her &gt"<br>
+}
+
+<li>Get All Comments for a post By Post Id:<a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/2/comments">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt POST_ID &gt;</b>/comments</a></li>
+Request Method:GET<br><br>
+<li>Get a particular comment by comment id under a post by post id:<a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/1/comments/2">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt POST_ID &gt</b>/comments/<b>&lt COMMENT_ID &gt</b></a></li>
+Request Method:GET<br><br>
+<li>Update a Comment By Id: <a href="http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/2/comments/5">http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/<b>&lt POST_ID &gt</b>/comments/<b>&lt COMMENT_ID &gt</b></a></li>
+Request Method:PUT <br>
+Rquest Body in JSON: <br>
+{
+
+                    "name": "name of commenter",
+                    "email": "user20@gmail.com",
+                    "body": "<updated comment>"
+}
 
 
-
+</ul>
 
