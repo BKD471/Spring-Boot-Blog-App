@@ -375,7 +375,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\":\"avergae\",\n    \"email\":\"user2@gmail.com\",\n    \"body\":\"It was a average post\"\n}",
+					"raw": "{\n    \"name\":\"excellent\",\n    \"email\":\"user891@gmail.com\",\n    \"body\":\"It was a excellent post\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -383,7 +383,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/3/comments",
+					"raw": "http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/posts/1/comments",
 					"protocol": "http",
 					"host": [
 						"blogrestapis-env",
@@ -396,7 +396,7 @@
 						"api",
 						"v1",
 						"posts",
-						"3",
+						"1",
 						"comments"
 					]
 				}
@@ -578,7 +578,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/categories/4",
+					"raw": "http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/categories/5",
 					"protocol": "http",
 					"host": [
 						"blogrestapis-env",
@@ -591,7 +591,7 @@
 						"api",
 						"v1",
 						"categories",
-						"4"
+						"5"
 					]
 				}
 			},
@@ -714,6 +714,10 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://blogrestapis-env.eba-mubssczk.ap-south-1.elasticbeanstalk.com/api/v1/categories/2",
 					"protocol": "http",
